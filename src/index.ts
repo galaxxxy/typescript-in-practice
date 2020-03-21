@@ -1,5 +1,3 @@
-import './datatype';
-import './enum';
 import './interface';
 
 let hello : string = 'hello typescript';
