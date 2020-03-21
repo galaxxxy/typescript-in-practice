@@ -1,4 +1,4 @@
-import './function';
+import './class';
 
 let hello : string = 'hello typescript';
 document.querySelectorAll('.app')[0].innerHTML = hello;
