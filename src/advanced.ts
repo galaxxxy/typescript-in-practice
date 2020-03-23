@@ -192,3 +192,63 @@ function getLanguage(type: Type, x: string | number) {
 }
 
 getLanguage(Type.Strong, 1);
+
+// 交叉类型与联合类型
+interface DogInterface {
+  run(): void
+}
+interface CatInterface {
+  jump(): void
+}
+// 交叉类型 并集
+let pet: DogInterface & CatInterface = {
+  run() {},
+  jump() {},
+};
+// 联合类型
+let a1: number | string;
+// 字面量联合类型
+let b1: 'a' | 'b' | 'c';
+let c1: 1 | 2 | 4;
+
+class Dogs implements DogInterface {
+  run() {}
+  eat() {}
+}
+class Cats implements CatInterface {
+  jump() {}
+  eat() {}
+}
+enum Master { Boy, Girl };
+function getPet(master: Master) {
+  let pet = master === Master.Boy ? new Dogs() : new Cats();
+  pet.eat();
+  // pet.run();
+  return pet;
+}
+interface Square {
+  kind: 'square';
+  size: number;
+}
+interface Rectangle {
+  kind: 'rectangle',
+  width: number;
+  height: number;
+}
+interface Circle {
+  kind: 'circle';
+  r: number;
+}
+type Shape = Square | Rectangle | Circle;
+function area(s: Shape) {
+  switch(s.kind) {
+    case 'square':
+      return s.size * s.size;
+    case 'rectangle':
+      return s.width * s.height;
+    case 'circle':
+      return Math.PI * s.r ** 2;
+    default: 
+      return ((e: never) => {throw new Error(e)})(s);
+  }
+}
